@@ -129,6 +129,116 @@ En esencia, un componente es una pieza de código preelaborado que encapsula alg
 
 A través de **Polyfills** podemos utilizar el estándar en prácticamente cualquier navegador y combinándolos con la librería **Polymer** (también desarrollada por Google) o **Stencil.js** (desarrollada por el equipo de ionic) nos permite crear web components de una forma sencilla, compartirlos y utilizarlos en los navegadores.
 
+-- h-l
+
+### VueJs
+
+## Input Component
+
+HTML
+
+```html
+<template>
+  <Input type="text" v-model="value" placeholder="{placeholder}">
+</template>
+``
+
+JavaScript
+
+```javascript
+const Input = {
+  name: 'Input',
+  props: {
+    defaulValue: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    }
+  },
+  data: function() {
+    return {
+      value: ''
+    };
+  },
+  mounted: function() {
+    this.value = this.defaulValue;
+  }
+};
+
+```
+
+-- h-l
+
+### ReactJs
+
+## Input Component
+
+HTML
+
+```html
+<div id="app" />
+```
+
+JavaScript
+
+```javascript
+const Input  = React.createClass({
+    render: function() {
+       return (
+           <input defaultValue="value" placeholder="input..."/>
+        );
+    }
+});
+
+ReactDOM.render(
+    <Input />,
+    document.getElementById('app')
+);
+
+```
+
+-- h-l
+
+### Angular
+
+## Input Component
+
+HTML
+
+```html
+<input-ui />
+```
+
+JavaScript
+
+```javascript
+var Input = {
+  bindings: {
+    api: '<',
+    onUpdate: '&'
+  },
+  template: `
+     <input ng-model="$ctrl.api.value" placeholder="{{$ctrl.api.placeholder}}"/>
+  `,
+  controller: function(){
+    var ctrl = this;
+    ctrl.$onChanges = function (changes) {
+      if (changes.api) {
+        ctrl.api = angular.copy(ctrl.api);
+      }
+    };
+    ctrl.api = {
+      value: 'value',
+      placeholder: 'input...'
+    };
+  }
+}
+
+```
+
 --
 
 ## Gracias!
