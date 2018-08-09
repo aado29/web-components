@@ -371,7 +371,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 
   </style>
-    <script async src="http://localhost:35729/livereload.js"></script>
 </head>
 <body>
     <div class="progress">
@@ -495,39 +494,96 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   <div class="slide hidden  h-l" id="slide-11">
     <section class="slide-content"><h3 id="vuejs">VueJs</h3>
 <h2 id="input-component">Input Component</h2>
+<p>HTML</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"value"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"{placeholder}"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"value"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"{placeholder}"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+``
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
-<span class="hljs-keyword">const</span> Comment = {
-  name: <span class="hljs-string">'Input'</span>,
-  template: <span class="hljs-string">'#comment-tmpl'</span>,
+JavaScript
+
+```javascript
+const Input = {
+  name: 'Input',
   props: {
     defaulValue: {
       type: String,
-      <span class="hljs-keyword">default</span>: <span class="hljs-string">''</span>
+      default: ''
     },
     placeholder: {
       type: String,
-      <span class="hljs-keyword">default</span>: <span class="hljs-string">''</span>
+      default: ''
     }
   },
-  data: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> {
-      value: <span class="hljs-string">''</span>
+  data: function() {
+    return {
+      value: ''
     };
   },
-  mounted: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">this</span>.value = <span class="hljs-keyword">this</span>.defaulValue;
+  mounted: function() {
+    this.value = this.defaulValue;
   }
 };
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
 </code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden  h-l" id="slide-12">
+    <section class="slide-content"><h3 id="reactjs">ReactJs</h3>
+<h2 id="input-component">Input Component</h2>
+<p>HTML</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span> /&gt;</span>
+</code></pre>
+<p>JavaScript</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> Input  = React.createClass({
+    <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+       <span class="hljs-keyword">return</span> (
+           <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">defaultValue</span>=<span class="hljs-string">"value"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"input..."</span>/&gt;</span>
+        );
+    }
+});
+
+ReactDOM.render(
+    <span class="hljs-tag">&lt;<span class="hljs-name">Input</span> /&gt;</span>,
+    document.getElementById('app')
+);
+</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden  h-l" id="slide-13">
+    <section class="slide-content"><h3 id="angular">Angular</h3>
+<h2 id="input-component">Input Component</h2>
+<p>HTML</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">input-ui</span> /&gt;</span>
+</code></pre>
+<p>JavaScript</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Input = {
+  <span class="hljs-attr">bindings</span>: {
+    <span class="hljs-attr">api</span>: <span class="hljs-string">'&lt;'</span>,
+    <span class="hljs-attr">onUpdate</span>: <span class="hljs-string">'&amp;'</span>
+  },
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
+     &lt;input ng-model="$ctrl.api.value" placeholder="{{$ctrl.api.placeholder}}"/&gt;
+  `</span>,
+  <span class="hljs-attr">controller</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> ctrl = <span class="hljs-keyword">this</span>;
+    ctrl.$onChanges = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">changes</span>) </span>{
+      <span class="hljs-keyword">if</span> (changes.api) {
+        ctrl.api = angular.copy(ctrl.api);
+      }
+    };
+    ctrl.api = {
+      <span class="hljs-attr">value</span>: <span class="hljs-string">'value'</span>,
+      <span class="hljs-attr">placeholder</span>: <span class="hljs-string">'input...'</span>
+    };
+  }
+}
+
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
     <section class="slide-content"><h2 id="gracias-">Gracias!</h2>
 <p><img src="thanks.gif" alt="Gracias"></p>
 </section>
